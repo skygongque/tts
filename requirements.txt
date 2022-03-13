@@ -1,0 +1,2 @@
+requests==2.15.1
+websockets==10.2
