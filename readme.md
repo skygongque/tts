@@ -59,5 +59,46 @@ python tts.py --input SSML.xml --output 保存文件名
 `rate` 速度  
 `pitch` 语调  
 
+
+## 进阶玩法(选择声音和说话风格)
+> 因为用的网页版背后的API 所有网页版可以选择的声音和风格，这个小工具同样可以实现    
+可以先看一下[声音和风格示例](./声音和风格示例)文件夹中的xml示例学习一下  
+SSML（语音合成标记语言） 的`speak`标签内嵌套一个或多个`voice`，voice name 声音的名字如`zh-CN-XiaoxiaoNeural`
+`voice` 中可以嵌套`mstts`，`mstts`标签内可以指定说法的风格如`chat`聊天风格
+，简单了解之后就可以通过调整 SSML，以控制文本不同部分的声音效果。
+
+```
+<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+    <voice name="zh-CN-XiaoxiaoNeural">
+        <mstts:express-as style="chat">
+            <prosody rate="0%" pitch="0%">晓晓聊天声音</prosody>
+        </mstts:express-as>
+    </voice>
+</speak>
+```
+### 常用声音和风格列表
+
+注'General'不用添加到sytle中
+
+| 中文名                     | voice name             | 支持风格 style                                               |
+| -------------------------- | ---------------------- | ------------------------------------------------------------ |
+| Xiaoxiao (Neural) - 晓晓   | zh-CN-XiaoxiaoNeural   | 'General', 'Assistant', 'Chat', 'Customer Service', 'Newscast', 'Affectionate', 'Angry', 'Calm', 'Cheerful', 'Disgruntled', 'Fearful', 'Gentle', 'Lyrical', 'Sad', 'Serious' |
+| Yunyang (Neural) - 云扬    | zh-CN-YunyangNeural    | 'General', 'Customer Service', 'Narration-professional', 'Newscast-casual' |
+| Xiaochen (Neural) - 晓辰   | zh-CN-XiaochenNeural   | 'General'                                                    |
+| Xiaohan (Neural) - 晓涵    | zh-CN-XiaohanNeural    | 'General', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Gentle', 'Affectionate', 'Embarrassed' |
+| Xiaomo (Neural) - 晓墨     | zh-CN-XiaomoNeural     | 'General', 'Embarrassed', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Depressed', 'Affectionate', 'Gentle', 'Envious' |
+| Xiaoqiu (Neural) - 晓秋    | zh-CN-XiaoruiNeural    | 'General'                                                    |
+| Xiaoshuang (Neural) - 晓双 | zh-CN-XiaoshuangNeural | 'General', 'Chat'                                            |
+| Xiaoxuan (Neural) - 晓萱   | zh-CN-XiaoxuanNeural   | 'General', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Gentle', 'Depressed' |
+| Xiaoyan (Neural) - 晓颜    | zh-CN-XiaoyanNeural    | 'General'                                                    |
+| Xiaoyou (Neural) - 晓悠    | zh-CN-XiaoyouNeural    | 'General'                                                    |
+| Yunxi (Neural) - 云希      | zh-CN-YunxiNeural      | 'General', 'Narration-relaxed', 'Embarrassed', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Depressed', 'Chat', 'Assistant', 'Newscast' |
+| Yunye (Neural) - 云野      | zh-CN-YunyeNeural      | 'General', 'Embarrassed', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad' |
+
+
+
+
+
 ## 如果对js逆向感兴趣
+
 [可以在这里看调试过程](debugger_note.md)
