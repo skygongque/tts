@@ -1,15 +1,24 @@
 # 文本转语音的简单demo
 官方的地址
 ```
-https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/#features
+https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#overview
 ```
-# 申明
+
+# 声明
 仅用于学习交流禁止商用
 
 # 项目的目的和相关说明
 - 项目的核心功能是，可以直接下载转换后的MP3文件，微软官方的网页版demo不能直接下载转换后的MP3文件（直接录音对于转换文字较多时不是很方便）
+- 该项目需要python环境，需要一点点python的基础（只要会用pip 安装包，会运行代码即可）
+- 因为本人UI水平比较差所以没有制作GUI，CLI的小工具打包成EXE意义不大（如果python都不会装，大概率也不会用CLI的EXE小工具）
+
 
 ## 使用方法
+
+使用方法视频版本
+https://www.bilibili.com/video/BV13S4y1D7u7   
+
+
 安装依赖
 ```
 pip install -r requirements.txt

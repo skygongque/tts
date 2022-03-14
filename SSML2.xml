@@ -1,0 +1,33 @@
+<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+    <voice name="zh-CN-XiaoxiaoNeural">
+        <prosody rate="0%" pitch="0%">
+做视频的时候，有时有文字转语音的需求，今天我就来教一下大家如何白嫖微软的tts(text to speech)。
+这个视频有详细的介绍微软的文字转语音有多么牛，我就不多赘述了。
+这个视频最后介绍了两种使用方法，一个是针对轻度用户直接使用网页版本录音(免费)，一个是注册账号使用付费版本。
+今天我来交给大家第一种方法的高端玩法，只要会一点点python（python的安装方法请看这个视频），就可以直接下载到文本转换后的mp3，不用繁琐的录音了。
+工具的下载我放简介了。
+使用方法
+1.安装依赖
+pip install -r requirements.txt
+
+安装完成后
+2.cmd中输入以下命令
+python tts.py --input SSML.xml
+其中input传入SSML语音合成标记语言的路径，回车运行即可
+如果需要改变文字的内容就直接在SSMM.xml的文件中改就可以了。
+如果需要添加其他声音可以添加一个voice块，比如添加一个云扬的声音就可以添加这样一个块。
+        </prosody>
+    </voice>
+    <voice name="zh-CN-YunyangNeural">
+        <prosody rate="0%" pitch="0%">
+        这个是云扬的声音。
+        其中rate代表速度，pitch代表音调，也可以根据需要调整。
+        然后就可以在当前文件夹看到output开头的mp3文件了
+        </prosody>
+    </voice>
+    <voice name="zh-CN-XiaoxiaoNeural">
+        <prosody rate="0%" pitch="0%">
+        如果觉得有所帮助，一键三连，支持一下吧。
+        </prosody>
+    </voice>
+</speak>
