@@ -80,22 +80,23 @@ SSML（语音合成标记语言） 的`speak`标签内嵌套一个或多个`voic
 
 注'General'不用添加到sytle中
 
-| 中文名                     | voice name             | 支持风格 style                                               |
-| -------------------------- | ---------------------- | ------------------------------------------------------------ |
-| Xiaoxiao (Neural) - 晓晓   | zh-CN-XiaoxiaoNeural   | 'General', 'Assistant', 'Chat', 'Customer Service', 'Newscast', 'Affectionate', 'Angry', 'Calm', 'Cheerful', 'Disgruntled', 'Fearful', 'Gentle', 'Lyrical', 'Sad', 'Serious' |
-| Yunyang (Neural) - 云扬    | zh-CN-YunyangNeural    | 'General', 'Customer Service', 'Narration-professional', 'Newscast-casual' |
-| Xiaochen (Neural) - 晓辰   | zh-CN-XiaochenNeural   | 'General'                                                    |
-| Xiaohan (Neural) - 晓涵    | zh-CN-XiaohanNeural    | 'General', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Gentle', 'Affectionate', 'Embarrassed' |
-| Xiaomo (Neural) - 晓墨     | zh-CN-XiaomoNeural     | 'General', 'Embarrassed', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Depressed', 'Affectionate', 'Gentle', 'Envious' |
-| Xiaoqiu (Neural) - 晓秋    | zh-CN-XiaoruiNeural    | 'General'                                                    |
-| Xiaoshuang (Neural) - 晓双 | zh-CN-XiaoshuangNeural | 'General', 'Chat'                                            |
-| Xiaoxuan (Neural) - 晓萱   | zh-CN-XiaoxuanNeural   | 'General', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Gentle', 'Depressed' |
-| Xiaoyan (Neural) - 晓颜    | zh-CN-XiaoyanNeural    | 'General'                                                    |
-| Xiaoyou (Neural) - 晓悠    | zh-CN-XiaoyouNeural    | 'General'                                                    |
-| Yunxi (Neural) - 云希      | zh-CN-YunxiNeural      | 'General', 'Narration-relaxed', 'Embarrassed', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad', 'Depressed', 'Chat', 'Assistant', 'Newscast' |
-| Yunye (Neural) - 云野      | zh-CN-YunyeNeural      | 'General', 'Embarrassed', 'Calm', 'Fearful', 'Cheerful', 'Disgruntled', 'Serious', 'Angry', 'Sad' |
+|           中文名           | voice name             | 支持风格 style                                               |
+| :------------------------: | ---------------------- | ------------------------------------------------------------ |
+|  Xiaoxiao (Neural) - 晓晓  | zh-CN-XiaoxiaoNeural   | 'general', 'assistant', 'chat', 'customerservice', 'newscast', 'affectionate', 'angry', 'calm', 'cheerful', 'disgruntled', 'fearful', 'gentle', 'lyrical', 'sad', 'serious' |
+|  Yunyang (Neural) - 云扬   | zh-CN-YunyangNeural    | 'general', 'customerservice', 'narration-professional', 'newscast-casual' |
+|  Xiaochen (Neural) - 晓辰  | zh-CN-XiaochenNeural   | 'general'                                                    |
+|  Xiaohan (Neural) - 晓涵   | zh-CN-XiaohanNeural    | 'general', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'gentle', 'affectionate', 'embarrassed' |
+|   Xiaomo (Neural) - 晓墨   | zh-CN-XiaomoNeural     | 'general', 'embarrassed', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'depressed', 'affectionate', 'gentle', 'envious' |
+|  Xiaoqiu (Neural) - 晓秋   | zh-CN-XiaoruiNeural    | 'general'                                                    |
+|  Xiaorui (Neural) - 晓睿   | zh-CN-XiaoruiNeural    | 'general', 'calm', 'fearful', 'angry', 'sad'                 |
+| Xiaoshuang (Neural) - 晓双 | zh-CN-XiaoshuangNeural | 'general', 'chat'                                            |
+|  Xiaoxuan (Neural) - 晓萱  | zh-CN-XiaoxuanNeural   | 'general', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'gentle', 'depressed' |
+|  Xiaoyan (Neural) - 晓颜   | zh-CN-XiaoyanNeural    | 'general'                                                    |
+|  Xiaoyou (Neural) - 晓悠   | zh-CN-XiaoyouNeural    | 'general'                                                    |
+|   Yunxi (Neural) - 云希    | zh-CN-YunxiNeural      | 'general', 'narration-relaxed', 'embarrassed', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'depressed', 'chat', 'assistant', 'newscast' |
+|   Yunye (Neural) - 云野    | zh-CN-YunyeNeural      | 'general', 'embarrassed', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad' |
 
-
+以上是中文部分的，微软的tts支持100多种语音，其他的语音自己在网页上查看吧
 
 
 
