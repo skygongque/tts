@@ -1,105 +1,22 @@
-# 文本转语音的简单demo
-官方的地址
+# 微软tts音频下载解决方案
+> 微软tts 使用 119 种语言和变体，超过 270 种神经语音来吸引全球观众。使用极具表现力和类似人类的声音将你的方案(如文本阅读器和支持语音的助手)变为现实。神经文本到语音转换功能支持若干种话语风格，包括聊天、新闻播报和客户服务，以及各种情感(如快乐和同情)。
+
+## 官方的demo地址
 ```
 https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#overview
 ```
 
-# 声明
-仅用于学习交流禁止商用
+# 项目目的和声明
+- 本项目的目的是解决微软官方的网页版demo，不能直接下载转换后的MP3文件
+- 本项目仅用于学习交流禁止用于商业用途
 
-# 项目的目的和相关说明
-- 项目的核心功能是，可以直接下载转换后的MP3文件，微软官方的网页版demo不能直接下载转换后的MP3文件（直接录音对于转换文字较多时不是很方便）
-- 该项目需要python环境，需要一点点python的基础（只要会用pip 安装包，会运行代码即可）
-- 因为本人UI水平比较差所以没有制作GUI，CLI的小工具打包成EXE意义不大（如果python都不会装，大概率也不会用CLI的EXE小工具）
+# 微软tts音频下载解决方案和对比
+1. python 制作的命令行（cli）小工具
+2. tampermonkey 脚本
 
+|                | python 制作的命令行（cli）小工具                             | tampermonkey 脚本                                            |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 使用方法       | 1. 安装python 并安装依赖 2. `python tts.py --input SSML.xml` 根据 SSML.xml 生成音频 [详细步骤](./python_cli_demo/readme.md) | 1.安装tampermonkey 2. 安装脚本[脚本主页](https://greasyfork.org/zh-CN/scripts/441531-%E5%BE%AE%E8%BD%AFtts-%E4%B8%8B%E8%BD%BD%E6%8C%89%E9%92%AE) 3. [稍详细说明](./tampermonkeyScript/readme.md)|
+| 易用性         | 无UI界面需要一定的学习成本                                   | 简单易用，原有网页添加下载音频按钮，其他使用方法相同         |
+| 扩展性和灵活性 | 易扩展更灵活                                                 | 相对不易扩展                                                 |
 
-## 使用方法
-
-使用方法视频版本
-https://www.bilibili.com/video/BV13S4y1D7u7   
-
-
-安装依赖
-```
-pip install -r requirements.txt
-```
-
-运行
-```
-python tts.py --input SSML.xml
-```
-> 使用python 运行tts.py，通过参数input传入`SSML.xml`文件的路径
-
-或者可以通过传入`output` 传入希望保存的文件名
-```
-python tts.py --input SSML.xml --output 保存文件名
-```
-
-`SSML.xml`文件的示例如下
-```
-<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-    <voice name="zh-CN-XiaoxiaoNeural">
-        <prosody rate="0%" pitch="0%">
-        这个是 SSML 语音合成标记语言
-        </prosody>
-    </voice>
-    <voice name="zh-CN-XiaoxiaoNeural">
-        <prosody rate="0%" pitch="0%">
-        这个是晓晓的声音
-        </prosody>
-    </voice>
-    <voice name="zh-CN-YunyangNeural">
-        <prosody rate="0%" pitch="0%">
-        这个是云扬的声音。
-        </prosody>
-    </voice>
-</speak>
-```
-`voice name` 声音的名字  
-`rate` 速度  
-`pitch` 语调  
-
-
-## 进阶玩法(选择声音和说话风格)
-> 因为用的网页版背后的API 所有网页版可以选择的声音和风格，这个小工具同样可以实现    
-可以先看一下[声音和风格示例](./声音和风格示例)文件夹中的xml示例学习一下  
-SSML（语音合成标记语言） 的`speak`标签内嵌套一个或多个`voice`，voice name 声音的名字如`zh-CN-XiaoxiaoNeural`
-`voice` 中可以嵌套`mstts`，`mstts`标签内可以指定说法的风格如`chat`聊天风格
-，简单了解之后就可以通过调整 SSML，以控制文本不同部分的声音效果。
-
-```
-<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-    <voice name="zh-CN-XiaoxiaoNeural">
-        <mstts:express-as style="chat">
-            <prosody rate="0%" pitch="0%">晓晓聊天声音</prosody>
-        </mstts:express-as>
-    </voice>
-</speak>
-```
-### 常用声音和风格列表
-
-注'General'不用添加到sytle中
-
-|           中文名           | voice name             | 支持风格 style                                               |
-| :------------------------: | ---------------------- | ------------------------------------------------------------ |
-|  Xiaoxiao (Neural) - 晓晓  | zh-CN-XiaoxiaoNeural   | 'general', 'assistant', 'chat', 'customerservice', 'newscast', 'affectionate', 'angry', 'calm', 'cheerful', 'disgruntled', 'fearful', 'gentle', 'lyrical', 'sad', 'serious' |
-|  Yunyang (Neural) - 云扬   | zh-CN-YunyangNeural    | 'general', 'customerservice', 'narration-professional', 'newscast-casual' |
-|  Xiaochen (Neural) - 晓辰  | zh-CN-XiaochenNeural   | 'general'                                                    |
-|  Xiaohan (Neural) - 晓涵   | zh-CN-XiaohanNeural    | 'general', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'gentle', 'affectionate', 'embarrassed' |
-|   Xiaomo (Neural) - 晓墨   | zh-CN-XiaomoNeural     | 'general', 'embarrassed', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'depressed', 'affectionate', 'gentle', 'envious' |
-|  Xiaoqiu (Neural) - 晓秋   | zh-CN-XiaoruiNeural    | 'general'                                                    |
-|  Xiaorui (Neural) - 晓睿   | zh-CN-XiaoruiNeural    | 'general', 'calm', 'fearful', 'angry', 'sad'                 |
-| Xiaoshuang (Neural) - 晓双 | zh-CN-XiaoshuangNeural | 'general', 'chat'                                            |
-|  Xiaoxuan (Neural) - 晓萱  | zh-CN-XiaoxuanNeural   | 'general', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'gentle', 'depressed' |
-|  Xiaoyan (Neural) - 晓颜   | zh-CN-XiaoyanNeural    | 'general'                                                    |
-|  Xiaoyou (Neural) - 晓悠   | zh-CN-XiaoyouNeural    | 'general'                                                    |
-|   Yunxi (Neural) - 云希    | zh-CN-YunxiNeural      | 'general', 'narration-relaxed', 'embarrassed', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad', 'depressed', 'chat', 'assistant', 'newscast' |
-|   Yunye (Neural) - 云野    | zh-CN-YunyeNeural      | 'general', 'embarrassed', 'calm', 'fearful', 'cheerful', 'disgruntled', 'serious', 'angry', 'sad' |
-
-以上是中文部分的，微软的tts支持100多种语音，其他的语音自己在网页上查看吧
-
-
-
-## 如果对js逆向感兴趣
-
-[可以在这里看调试过程](debugger_note.md)
