@@ -13,6 +13,7 @@
 (function () {
     'use strict';
     window.xtw = {}
+    // hook addEventListener
     window.document.addEventListener_ = document.addEventListener;
     document.addEventListener = function () {
         if (arguments[0] == "DOMContentLoaded" && arguments.length == 2) {
@@ -20,13 +21,15 @@
             window.initializeTTSDemo2 = function (localizedResources) {
                 $(document).ready(function () {
                     if (!window.xtw.playdlbut) {
-                        window.xtw.playliparent = document.getElementById('playli').parentElement
                         window.xtw.playdlbut = document.createElement("button");
                         window.xtw.playdlbut.innerHTML = "先点播放";
                         window.xtw.playdlbut.classList.add('button');
                         window.xtw.playdlbut.classList.add('button--primary01');
                         window.xtw.playdlbut.classList.add('svg-button');
-                        window.xtw.playliparent.appendChild(window.xtw.playdlbut);
+                        window.xtw.li = document.createElement('li');
+                        window.xtw.li.appendChild(window.xtw.playdlbut);
+                        window.xtw.playliparent = document.getElementById('playli').parentElement
+                        window.xtw.playliparent.appendChild(window.xtw.li);
                     }
                     var play = document.getElementById('playbtn'),
                         playli = document.getElementById('playli'),
@@ -377,6 +380,8 @@
             window.document.addEventListener_(arguments[0], arguments[1], arguments[2])
         } else if (arguments.length == 2) {
             window.document.addEventListener_(arguments[0], arguments[1])
+        }else{
+            debugger;
         }
     }
     // Your code here...
