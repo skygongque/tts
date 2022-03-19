@@ -9,6 +9,9 @@ https://greasyfork.org/zh-CN/scripts/441531-%E5%BE%AE%E8%BD%AFtts-%E4%B8%8B%E8%B
 
 ![image-20220315190356310](assets/readme/image-20220315190356310.png)
 
+## 详细debugge 笔记
+[debugge 笔记](./debugge_note.md)
+
 ## 笔记
 
 1. tampermokey 尽可能早运行脚本`@run-at document-star`

@@ -1,12 +1,18 @@
 # 微软tts 下载音频按钮（tampermonkey脚本）的实现思路
 
-- 目的是解决微软官方的网页版demo，不能直接下载转换后的MP3文件
-
-目标网站
+**目标网站**
 
 ```
 https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#features
 ```
+
+
+
+- 目的是解决微软官方的网页版demo，不能直接下载转换后的MP3文件
+
+**效果**
+
+![image-20220319101032760](assets/debugge_note/image-20220319101032760.png)
 
 
 
