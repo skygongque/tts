@@ -80,9 +80,9 @@ async def transferMsTTSData(SSML_text, outputPath):
                 if type(response) == type(bytes()):
                     # Extract binary data
                     try:
-                        start_ind = str(response).find('Path:audio')
-                        #audio_string += str(response)[start_ind+14:-1]
-                        audio_stream += response[start_ind-2:]
+                        needle = b'Path:audio\r\n'
+                        start_ind = response.find(needle) + len(needle)
+                        audio_stream += response[start_ind:]
                     except:
                         pass
             else:
