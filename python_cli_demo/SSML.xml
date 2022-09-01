@@ -1,6 +1,7 @@
 <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
     <voice name="zh-CN-XiaoxiaoNeural">
         <prosody rate="0%" pitch="0%">
+        wss的cognitiveservices/websocket/v1 接口目前没有认证可能很快失效
         这个是 SSML 语音合成标记语言，可以替换为自己需要的文字
         项目的核心功能是，可以直接下载转换后的MP3文件，微软官方的网页版demo不能直接下载转换后的MP3文件（直接录音对于转换文字较多时不是很方便）
         </prosody>
