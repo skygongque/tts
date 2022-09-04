@@ -16,7 +16,8 @@ https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#ov
 
 |                | python 制作的命令行（cli）小工具                             | tampermonkey 脚本                                            |
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 使用方法       | 1. 安装python 并安装依赖 2. `python tts.py --input SSML.xml` 根据 SSML.xml 生成音频 [详细步骤](./python_cli_demo/readme.md) | 1.安装tampermonkey 2. 安装脚本[脚本主页](https://greasyfork.org/zh-CN/scripts/441531-%E5%BE%AE%E8%BD%AFtts-%E4%B8%8B%E8%BD%BD%E6%8C%89%E9%92%AE) 3. [稍详细说明](./tampermonkeyScript/readme.md)|
+| 使用方法       | 1. 安装python 并安装依赖 2. `python tts.py --input SSML.xml` 根据 SSML.xml 生成音频 [详细步骤](./python_cli_demo/readme.md) | 1.安装tampermonkey 2. 安装脚本[脚本主页](https://greasyfork.org/zh-CN/scripts/441531-%E5%BE%AE%E8%BD%AFtts-%E4%B8%8B%E8%BD%BD%E6%8C%89%E9%92%AE) 3. 低网速时推荐[大佬的类似功能脚本](https://greasyfork.org/zh-CN/scripts/444347-azure-speech-download)4. [稍详细说明](./tampermonkeyScript/readme.md)
+|
 | 易用性         | 无UI界面需要一定的学习成本                                   | 简单易用，原有网页添加下载音频按钮，其他使用方法相同         |
 | 扩展性和灵活性 | 易扩展更灵活                                                 | 相对不易扩展                                                 |
 
