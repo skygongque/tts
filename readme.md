@@ -3,7 +3,7 @@
 
 ## 官方的demo地址
 ```
-https://azure.microsoft.com/zh-cn/services/cognitive-services/text-to-speech/#overview
+https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#overview
 ```
 
 # 项目目的和声明
