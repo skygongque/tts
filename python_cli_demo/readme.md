@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 python tts.py --input SSML.xml
 ```
-> 使用python 运行tts.py，通过参数input传入`SSML.xml`文件的路径
+> 在python_cli_demo目录下 使用python 运行tts.py，通过参数input传入`SSML.xml`文件的路径
 
 或者可以通过传入`output` 传入希望保存的文件名
 ```
