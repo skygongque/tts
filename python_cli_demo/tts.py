@@ -56,16 +56,17 @@ async def transferMsTTSData(SSML_text, outputPath):
     # 目前该接口没有认证可能很快失效
     endpoint2 = f"wss://eastus.api.speech.microsoft.com/cognitiveservices/websocket/v1?TrafficType=AzureDemo&Authorization=bearer%20undefined&X-ConnectionId={req_id}"
     async with websockets.connect(endpoint2,extra_headers={'Origin':'https://azure.microsoft.com'}) as websocket:
+        # 创建WS link
         payload_1 = '{"context":{"system":{"name":"SpeechSDK","version":"1.12.1-rc.1","build":"JavaScript","lang":"JavaScript","os":{"platform":"Browser/Linux x86_64","name":"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0","version":"5.0 (X11)"}}}}'
         message_1 = 'Path : speech.config\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
             getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_1
         await websocket.send(message_1)
-
+        # 发送合成语音配置,更改格式需要重新发送
         payload_2 = '{"synthesis":{"audio":{"metadataOptions":{"sentenceBoundaryEnabled":false,"wordBoundaryEnabled":false},"outputFormat":"audio-16khz-32kbitrate-mono-mp3"}}}'
         message_2 = 'Path : synthesis.context\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
             getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_2
         await websocket.send(message_2)
-
+        # 发送txt文本
         # payload_3 = '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="' + voice + '"><mstts:express-as style="General"><prosody rate="'+spd+'%" pitch="'+ptc+'%">'+ msg_content +'</prosody></mstts:express-as></voice></speak>'
         payload_3 = SSML_text
         message_3 = 'Path: ssml\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
@@ -97,13 +98,11 @@ async def transferMsTTSData(SSML_text, outputPath):
             else:
                 break
         #append ab or write wb
-        writeMode = "wb" if transferMsTTSData.firstWrite else "ab" 
-        transferMsTTSData.firstWrite = False
+        writeMode = "wb" if transferMsTTSData.count==0 else "ab" 
         with open(f'{outputPath}.mp3', writeMode) as audio_out:
             transferMsTTSData.count +=1
             print("█"*transferMsTTSData.count, end ="") 
             audio_out.write(audio_stream)
-transferMsTTSData.firstWrite = True
 transferMsTTSData.count = 0
 
 async def mainSeq(SSML_text, outputPath):
@@ -128,20 +127,20 @@ def fileTTS():
         lineNum+=1
         if startlineNum<=lineNum:
             chunk+= line
-            if len(chunk) >200:
+            if len(chunk) >400*3:
                 SSML_text ='<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="' + "zh-CN-XiaoxiaoNeural" + '"><mstts:express-as style="General"><prosody rate="'+"0"+'%" pitch="'+"0"+'%">'+ chunk +'</prosody></mstts:express-as></voice></speak>'            
                 output_path = args.output if args.output else 'output_'+ str(int(time.time()*1000))
                 count += 1
                 tryTimes = 0
-                maxTimes = 2
+                maxTimes = 1
                 print(f" from line {startlineNum} to line {lineNum}.",end ="")
                 while count != transferMsTTSData.count and tryTimes<maxTimes:
                     print(f"\ntry {tryTimes+1}st time")
                     asyncio.get_event_loop().run_until_complete(mainSeq(SSML_text, output_path)) 
+                    time.sleep(.5 + 3*tryTimes)
                     tryTimes+=1
-                    time.sleep(3*(tryTimes+1))
-                if tryTimes == maxTimes:
-                    print(f"Timeout at {count}st req with {maxTimes} repetitions, line {startlineNum}")
+                if count != transferMsTTSData.count:
+                    print(f" Timeout at {count}st req with {maxTimes} repetitions, line {startlineNum}")
                     break
                 startlineNum = lineNum+1
                 chunk = ""
@@ -162,3 +161,4 @@ if __name__ == "__main__":
     # python tts.py --input SSML.xml
     # python tts.py --input SSML.xml --output 保存文件名
     # python tts.py --input txt文件 --output 保存文件名
+    # python tts.py --input 教案.txt --output hii
