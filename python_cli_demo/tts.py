@@ -17,7 +17,7 @@ class MsTTS:
         self.SSML_text = SSML_text 
         self.__result = False
     # Generate X-Timestamp all correctly formatted
-    def getXTime():
+    def getXTime(self):
         # Fix the time to match Americanisms
         def hr_cr(hr):
             corrected = (hr - 1) % 24
@@ -56,20 +56,20 @@ class MsTTS:
             # 创建WS link
             payload_1 = '{"context":{"system":{"name":"SpeechSDK","version":"1.12.1-rc.1","build":"JavaScript","lang":"JavaScript","os":{"platform":"Browser/Linux x86_64","name":"Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0","version":"5.0 (X11)"}}}}'
             message_1 = 'Path : speech.config\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
-                getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_1
+                self.getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_1
             await websocket.send(message_1)
 
             # 发送合成语音配置,更改格式需要重新发送
             payload_2 = '{"synthesis":{"audio":{"metadataOptions":{"sentenceBoundaryEnabled":false,"wordBoundaryEnabled":false},"outputFormat":"audio-16khz-32kbitrate-mono-mp3"}}}'
             message_2 = 'Path : synthesis.context\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
-                getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_2
+                self.getXTime() + '\r\nContent-Type: application/json\r\n\r\n' + payload_2
             await websocket.send(message_2)
 
             # 发送SSML文本
             # payload_3 = '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="' + voice + '"><mstts:express-as style="General"><prosody rate="'+spd+'%" pitch="'+ptc+'%">'+ msg_content +'</prosody></mstts:express-as></voice></speak>'
             payload_3 = self.SSML_text
             message_3 = 'Path: ssml\r\nX-RequestId: ' + req_id + '\r\nX-Timestamp: ' + \
-                getXTime() + '\r\nContent-Type: application/ssml+xml\r\n\r\n' + payload_3
+                self.getXTime() + '\r\nContent-Type: application/ssml+xml\r\n\r\n' + payload_3
             await websocket.send(message_3)
 
             # Checks for close connection message
@@ -97,8 +97,8 @@ class MsTTS:
                     self.__result = True#"response complete"
                     break
 
-    async def getAudioStream(self):
-        await asyncio.get_event_loop().run_until_complete(self.transferMsTTSData())
+    def getAudioStream(self):
+        asyncio.get_event_loop().run_until_complete(self.transferMsTTSData())
         return self.__result
 
 
@@ -112,16 +112,16 @@ class TTSHandler:
         if self.fileType=='.xml':
             ttsHandle = MsTTS(self.text)
             if(ttsHandle.getAudioStream()):
-                saveDate2MP3(ttsHandle.audio_stream,self.output_path)
+                self.saveDate2MP3(ttsHandle.audio_stream,self.output_path)
         else:
             self.textArray = self.splitext(self.text)
             self.writeIndex = writeIndex
-            for(t in self.textArray):
-                ttsHandle = MsTTS(wrapinSSML(t)) 
+            for t in self.textArray:
+                ttsHandle = MsTTS(self.wrapinSSML(t)) 
                 if(ttsHandle.getAudioStream()):
                     self.writeMode = "ab" if self.writeIndex else "wb"
                     self.writeIndex +=1
-                    saveDate2MP3(ttsHandle.audio_stream,self.output_path,self.writeMode)
+                    self.saveDate2MP3(ttsHandle.audio_stream,self.output_path,self.writeMode)
                 else:
                     print(f"fail to get Audio Stream ,writeIndex {self.writeIndex}")
                     break
@@ -166,5 +166,4 @@ if __name__ == "__main__":
 
     # python tts.py --input SSML.xml
     # python tts.py --input SSML.xml --output 保存文件名
-    # python tts.py --input txt文件 --output 保存文件名
-    # python tts.py --input 教案.txt --output hiii
+    # python tts.py --input txtFile.ext --output 保存文件名
