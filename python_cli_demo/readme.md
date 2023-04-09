@@ -31,27 +31,17 @@ python tts.py --input SSML.xml --output 保存文件名
         这个是 SSML 语音合成标记语言
         </prosody>
     </voice>
-    <voice name="zh-CN-XiaoxiaoNeural">
-        <prosody rate="0%" pitch="0%">
-        这个是晓晓的声音
-        </prosody>
-    </voice>
-    <voice name="zh-CN-YunyangNeural">
-        <prosody rate="0%" pitch="0%">
-        这个是云扬的声音。
-        </prosody>
-    </voice>
 </speak>
 ```
 `voice name` 声音的名字  
 `rate` 速度  
 `pitch` 语调  
-
+> 使用的新接口不支持多个`voice`标签，即一次生成无法使用两种声音
 
 ## 进阶玩法(选择声音和说话风格)
 > 因为用的网页版背后的API 所有网页版可以选择的声音和风格，这个小工具同样可以实现    
 可以先看一下[声音和风格示例](./声音和风格示例)文件夹中的xml示例学习一下  
-SSML（语音合成标记语言） 的`speak`标签内嵌套一个或多个`voice`，voice name 声音的名字如`zh-CN-XiaoxiaoNeural`
+SSML（语音合成标记语言） 的`speak`标签内嵌套一个`voice`，voice name 声音的名字如`zh-CN-XiaoxiaoNeural`
 `voice` 中可以嵌套`mstts`，`mstts`标签内可以指定说法的风格如`chat`聊天风格
 ，简单了解之后就可以通过调整 SSML，以控制文本不同部分的声音效果。
 
@@ -91,3 +81,10 @@ SSML（语音合成标记语言） 的`speak`标签内嵌套一个或多个`voic
 ## 如果对js逆向感兴趣
 
 [可以在这里看调试过程](debugger_note.md)
+
+
+## 参考代码
+```
+https://github.com/OS984/DiscordBotBackend/blob/3b06b8be39e4dbc07722b0afefeee4c18c136102/NeuralTTS.py
+https://github.com/rany2/edge-tts/blob/master/src/edge_tts/communicate.py
+```
