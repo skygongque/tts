@@ -13,6 +13,7 @@ https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#ov
 # 微软tts音频下载解决方案和对比
 1. python 制作的命令行（cli）小工具
 2. tampermonkey 脚本
+## 目前微软官方的demo已经移除，所以tampermonkey版本失效，但python cli版本仍然有效(使用edge在线tts)，支持晓晓云希等常见声音，可以调节语速、声调和音量，但不支持自定义ssml，即不支持情感调节
 
 |                | python 制作的命令行（cli）小工具                             | tampermonkey 脚本                                            |
 | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
