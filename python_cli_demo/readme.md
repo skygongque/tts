@@ -1,5 +1,14 @@
 # 微软tts python版demo(cli)
 
+## 写在前面
+
+本仓库一开始的目的，是为了解决微软官方azure的网页版demo。不能直接下载转换后的MP3文件的问题
+
+目前azure的网页版demo已经关闭，tampermonky版本失效，作为替代方法本仓库简单实现了，通过edge大声朗读接口和microsoft语音合成试用接口，下载合成后MP3文件的python版本，**仅用于学习交流之用，禁止用于商业用途**。
+
+为了通俗易懂代码没有进行任何不必要的封装，tts.py 和tts2.py在均可独立运行。
+
+如果需要成品软件强烈建议直接下载LokerL大佬编写的成品软件，https://github.com/LokerL/tts-vue/releases
 
 ## 使用方法
 
@@ -13,17 +22,22 @@ pip install -r requirements.txt
 ```
 
 运行
-```
-python tts.py --input SSML.xml
+```bash
+python tts.py --input SSML.xml 
+## 或者 
+python tts2.py --input SSML.xml
 ```
 > 在python_cli_demo目录下 使用python 运行tts.py，通过参数input传入`SSML.xml`文件的路径
 
 或者可以通过传入`output` 传入希望保存的文件名
-```
-python tts.py --input SSML.xml --output 保存文件名
+```bash
+python tts.py --input SSML.xml --output 保存文件名 
+# 或者
+python tts2.py --input SSML.xml --output 保存文件名 
 ```
 
 `SSML.xml`文件的示例如下
+
 ```
 <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
     <voice name="zh-CN-XiaoxiaoNeural">
@@ -33,12 +47,25 @@ python tts.py --input SSML.xml --output 保存文件名
     </voice>
 </speak>
 ```
-`voice name` 声音的名字  
-`rate` 速度  
-`pitch` 语调  
-> 使用的新接口不支持多个`voice`标签，即一次生成无法使用两种声音
+## 接口说明
 
-## 进阶玩法(选择声音和说话风格)
+**tts.py** 使用edge大声朗读接口（下称edge接口）   
+
+接口地址 wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
+
+**tts2.py** 使用microsoft语音合成试用接口（下称microsoft接口）
+
+接口地址 https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak
+
+|               | 稳定性 | 是否付费 | 是否支持说话风格 | 代码示例   |
+| ------------- | ------ | -------- | ---------------- | ---------- |
+| edge接口      | 中     | 免费     | 否               | tts.py     |
+| microsoft接口 | 低     | 免费     | 是               | tts2.py    |
+| azure接口     | 高     | 付费     | 是               | 见官方文档 |
+
+
+
+## 进阶玩法(选择声音和说话风格，edge接口不支持说法风格)
 > 因为用的网页版背后的API 所有网页版可以选择的声音和风格，这个小工具同样可以实现    
 可以先看一下[声音和风格示例](./声音和风格示例)文件夹中的xml示例学习一下  
 SSML（语音合成标记语言） 的`speak`标签内嵌套一个`voice`，voice name 声音的名字如`zh-CN-XiaoxiaoNeural`
@@ -57,6 +84,8 @@ SSML（语音合成标记语言） 的`speak`标签内嵌套一个`voice`，voic
 ### 常用声音和风格列表
 
 注'General'不用添加到sytle中
+
+> edge接口不支持说法风格
 
 |           中文名           | voice name             | 支持风格 style                                               |
 | :------------------------: | ---------------------- | ------------------------------------------------------------ |
@@ -87,4 +116,5 @@ SSML（语音合成标记语言） 的`speak`标签内嵌套一个`voice`，voic
 ```
 https://github.com/OS984/DiscordBotBackend/blob/3b06b8be39e4dbc07722b0afefeee4c18c136102/NeuralTTS.py
 https://github.com/rany2/edge-tts/blob/master/src/edge_tts/communicate.py
+https://github.com/LokerL/tts-vue/blob/main/electron/utils/api.ts
 ```

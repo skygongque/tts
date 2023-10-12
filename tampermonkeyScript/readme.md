@@ -1,4 +1,12 @@
 # 微软tts 下载音频按钮（tampermonkey脚本）
+**因为azure官方demo关闭，tampermonkey脚本方法失效，请查看python_cli_demo版本**
+
+**因为azure官方demo关闭，tampermonkey脚本方法失效，请查看python_cli_demo版本**
+
+**因为azure官方demo关闭，tampermonkey脚本方法失效，请查看python_cli_demo版本**
+
+
+
 **脚本主页**
 
 ```

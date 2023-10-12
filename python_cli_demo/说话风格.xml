@@ -4,4 +4,9 @@
             <prosody rate="0%" pitch="0%">晓晓聊天声音</prosody>
         </mstts:express-as>
     </voice>
+    <voice name="zh-CN-XiaoxiaoNeural">
+        <mstts:express-as style="angry">
+            <prosody rate="0%" pitch="0%">晓晓生气声音</prosody>
+        </mstts:express-as>
+    </voice>
 </speak>

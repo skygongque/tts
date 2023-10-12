@@ -1,7 +1,7 @@
 # 微软tts音频下载解决方案
 > 微软tts 使用 119 种语言和变体，超过 270 种神经语音来吸引全球观众。使用极具表现力和类似人类的声音将你的方案(如文本阅读器和支持语音的助手)变为现实。神经文本到语音转换功能支持若干种话语风格，包括聊天、新闻播报和客户服务，以及各种情感(如快乐和同情)。
 
-## 官方的demo地址
+## 官方的demo地址（目前仅有介绍不支持语音合成）
 ```
 https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#overview
 ```
@@ -10,13 +10,71 @@ https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#ov
 - 本项目的目的是解决微软官方的网页版demo，不能直接下载转换后的MP3文件
 - 本项目仅用于学习交流禁止用于商业用途
 
-# 微软tts音频下载解决方案和对比
-1. python 制作的命令行（cli）小工具
-2. tampermonkey 脚本
-## 目前微软官方的demo已经移除，所以tampermonkey版本失效，但python cli版本仍然有效(使用edge在线tts)，支持晓晓云希等常见声音，可以调节语速、声调和音量，但不支持自定义ssml，即不支持情感调节
+目前azure的网页版demo已经关闭，**python_cli_demo**，作为替代方法本仓库简单实现了，通过edge大声朗读接口和microsoft语音合成试用接口，下载合成后MP3文件的python版本（**见python_cli_demo文件夹**）
 
-|                | python 制作的命令行（cli）小工具                             | tampermonkey 脚本                                            |
-| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 使用方法       | 1. 安装python 并安装依赖 2. `python tts.py --input SSML.xml` 根据 SSML.xml 生成音频 [详细步骤](./python_cli_demo/readme.md) | 1.安装tampermonkey 2. 安装脚本[脚本主页](https://greasyfork.org/zh-CN/scripts/441531-%E5%BE%AE%E8%BD%AFtts-%E4%B8%8B%E8%BD%BD%E6%8C%89%E9%92%AE) 3. 推荐[大佬的更全功能的脚本](https://greasyfork.org/zh-CN/scripts/444347-azure-speech-download)4. [稍详细说明](./tampermonkeyScript/readme.md) |
-| 易用性         | 无UI界面需要一定的学习成本                                   | 简单易用，原有网页添加下载音频按钮，其他使用方法相同         |
-| 扩展性和灵活性 | 易扩展更灵活                                                 | 相对不易扩展                                                 |
+为了通俗易懂代码没有进行任何不必要的封装，tts.py 和tts2.py在均可独立运行。
+
+如果需要成品软件强烈建议直接下载LokerL大佬编写的成品软件，https://github.com/LokerL/tts-vue/releases
+
+## 使用方法
+
+使用方法视频版本
+https://www.bilibili.com/video/BV13S4y1D7u7   
+
+
+安装依赖
+
+```
+pip install -r requirements.txt
+```
+
+运行
+
+```bash
+python tts.py --input SSML.xml 
+## 或者 
+python tts2.py --input SSML.xml
+```
+
+> 在python_cli_demo目录下 使用python 运行tts.py，通过参数input传入`SSML.xml`文件的路径
+
+或者可以通过传入`output` 传入希望保存的文件名
+
+```bash
+python tts.py --input SSML.xml --output 保存文件名 
+# 或者
+python tts2.py --input SSML.xml --output 保存文件名 
+```
+
+`SSML.xml`文件的示例如下
+
+```
+<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+    <voice name="zh-CN-XiaoxiaoNeural">
+        <prosody rate="0%" pitch="0%">
+        这个是 SSML 语音合成标记语言
+        </prosody>
+    </voice>
+</speak>
+```
+
+## 接口说明
+
+**tts.py** 使用edge大声朗读接口（下称edge接口）   
+
+接口地址 wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
+
+**tts2.py** 使用microsoft语音合成试用接口（下称microsoft接口）
+
+接口地址 https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak
+
+|               | 稳定性 | 是否付费 | 是否支持说话风格 | 代码示例   |
+| ------------- | ------ | -------- | ---------------- | ---------- |
+| edge接口      | 中     | 免费     | 否               | tts.py     |
+| microsoft接口 | 低     | 免费     | 是               | tts2.py    |
+| azure接口     | 高     | 付费     | 是               | 见官方文档 |
+
+
+
+
+
