@@ -5,16 +5,12 @@
 ```
 https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#overview
 ```
+> 目前azure的网页版demo已经关闭，原先的tampermonkey方法失效  
 
 # 项目目的和声明
-- 本项目的目的是解决微软官方的网页版demo，不能直接下载转换后的MP3文件
+- 本项目用python实现了microsoft语音合成试用接口、edge大声朗读接口的调用（见**python_cli_demo**文件夹）
 - 本项目仅用于学习交流禁止用于商业用途
 
-目前azure的网页版demo已经关闭，**python_cli_demo**，作为替代方法本仓库简单实现了，通过edge大声朗读接口和microsoft语音合成试用接口，下载合成后MP3文件的python版本（**见python_cli_demo文件夹**）
-
-为了通俗易懂代码没有进行任何不必要的封装，tts.py 和tts2.py在均可独立运行。
-
-如果需要成品软件强烈建议直接下载LokerL大佬编写的成品软件，https://github.com/LokerL/tts-vue/releases
 
 ## 使用方法
 
@@ -57,6 +53,8 @@ python tts2.py --input SSML.xml --output 保存文件名
     </voice>
 </speak>
 ```
+> 为了通俗易懂代码没有进行任何不必要的封装，tts.py 和tts2.py在均可独立运行。
+>
 
 ## 接口说明
 
@@ -74,7 +72,8 @@ python tts2.py --input SSML.xml --output 保存文件名
 | microsoft接口 | 低     | 免费     | 是               | tts2.py    |
 | azure接口     | 高     | 付费     | 是               | 见官方文档 |
 
-
+## 其他项目
+如果需要成品软件建议直接下载LokerL大佬编写的成品软件，有UI界面适合没有编程基础的一般用户，https://github.com/LokerL/tts-vue/releases 
 
 
 
