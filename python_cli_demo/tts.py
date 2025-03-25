@@ -4,7 +4,6 @@ https://github.com/OS984/DiscordBotBackend/blob/3b06b8be39e4dbc07722b0afefeee4c1
 https://github.com/rany2/edge-tts/blob/master/src/edge_tts/communicate.py
 '''
 
-
 import websockets
 import asyncio
 from datetime import datetime
@@ -12,6 +11,8 @@ import time
 import re
 import uuid
 import argparse
+
+from drm import DRM
 
 
 '''命令行参数解析'''
@@ -46,6 +47,7 @@ async def transferMsTTSData(SSML_text, outputPath):
     req_id = uuid.uuid4().hex.upper()
     print(req_id)
     # TOKEN来源 https://github.com/rany2/edge-tts/blob/master/src/edge_tts/constants.py
+    # Sec-MS-GEC 令牌生成方法 https://github.com/rany2/edge-tts/blob/ecf50b916e97f1790cf0a9602ae82f287389318c/src/edge_tts/drm.py
     # 查看支持声音列表 https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/voices/list?trustedclienttoken=6A5AA1D4EAFF4E9FB37E23D68491D6F4
     TRUSTED_CLIENT_TOKEN = "6A5AA1D4EAFF4E9FB37E23D68491D6F4"
     WSS_URL = (
@@ -53,15 +55,20 @@ async def transferMsTTSData(SSML_text, outputPath):
         + "readaloud/edge/v1?TrustedClientToken="
         + TRUSTED_CLIENT_TOKEN
     )
-    endpoint2 = f"{WSS_URL}&ConnectionId={req_id}"
+    CHROMIUM_FULL_VERSION = "130.0.2849.68"
+    CHROMIUM_MAJOR_VERSION = CHROMIUM_FULL_VERSION.split(".", maxsplit=1)[0]
+    SEC_MS_GEC_VERSION = f"1-{CHROMIUM_FULL_VERSION}"
+    User_Agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    f" (KHTML, like Gecko) Chrome/{CHROMIUM_MAJOR_VERSION}.0.0.0 Safari/537.36"
+    f" Edg/{CHROMIUM_MAJOR_VERSION}.0.0.0"
+    endpoint2 = f"{WSS_URL}&Sec-MS-GEC={DRM.generate_sec_ms_gec()}&Sec-MS-GEC-Version={SEC_MS_GEC_VERSION}&ConnectionId={req_id}"
     async with websockets.connect(endpoint2,extra_headers={
         "Pragma": "no-cache",
         "Cache-Control": "no-cache",
         "Origin": "chrome-extension://jdiccldimpdaibmpdkjnbmckianbfold",
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language": "en-US,en;q=0.9",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        " (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.864.41"}) as websocket:
+        "User-Agent": User_Agent}) as websocket:
         message_1 = (
                     f"X-Timestamp:{getXTime()}\r\n"
                     "Content-Type:application/json; charset=utf-8\r\n"
