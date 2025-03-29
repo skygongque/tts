@@ -8,7 +8,7 @@ https://azure.microsoft.com/zh-cn/products/cognitive-services/text-to-speech/#ov
 > 目前azure的网页版demo已经关闭，原先的tampermonkey方法失效  
 
 # 项目目的和声明
-- 本项目用python实现了microsoft语音合成试用接口、edge大声朗读接口的调用（见**python_cli_demo**文件夹）
+- 本项目用python实现了microsoft语音合成试用接口(tts2.py)、edge大声朗读接口的调用(tts.py)
 - 本项目仅用于学习交流禁止用于商业用途
 
 
